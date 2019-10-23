@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import Recipe from "./Recipe";
 import RecipeSearch from "./RecipeSearch";
-//import { recipes } from '../tempList';
-
 
 class RecipeList extends Component {
     render() {
-        const { recipes, navigateToDetails } = this.props;
+        const {
+            recipes,
+            navigateToDetails,
+            handleChangeSearch,
+            handleSubmitSearch,
+            searchValue
+        } = this.props;
+
         return (
             <React.Fragment>
-                <RecipeSearch />
+                <RecipeSearch handleChange={handleChangeSearch} handleSubmit={handleSubmitSearch}
+                    searchValue={searchValue} />
+
                 <div className="container my-5">
                     <div className="row">
                         <div className="col-10 mx-auto col-md-6 text-center text-uppercase mb-3">
@@ -18,10 +25,10 @@ class RecipeList extends Component {
                     </div>
                     <div className="row">
                         {
-                            recipes.map(recipe => {
+                            recipes.map(item => {
                                 return (
-                                    <Recipe key={recipe.recipe_id} recipe={recipe} 
-                                    navigateToDetails={navigateToDetails}/>
+                                    <Recipe key={item.recipe.uri} recipe={item.recipe}
+                                        navigateToDetails={navigateToDetails} />
                                 )
                             })
                         }
